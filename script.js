@@ -33,10 +33,213 @@
   });
 })();
 
-/* ─── AUDIO MUTED (PER USER REQUEST) ─── */
-function playTick() {}
-function playKeyClick() {}
-function playMidnightChime() {}
+/* ─── WEB AUDIO SOUND EFFECTS & BIRTHDAY MUSIC ─── */
+let audioCtx = null;
+function getAudioCtx() {
+  if (!audioCtx) {
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (AudioContext) {
+      audioCtx = new AudioContext();
+    }
+  }
+  if (audioCtx && audioCtx.state === 'suspended') {
+    audioCtx.resume();
+  }
+  return audioCtx;
+}
+
+// Seamlessly unlock audio on user gesture
+['click', 'touchstart', 'keydown'].forEach(evt => {
+  window.addEventListener(evt, () => {
+    getAudioCtx();
+  }, { once: true });
+});
+
+function playTick() {
+  try {
+    const ctx = getAudioCtx();
+    if (!ctx) return;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(800, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(120, ctx.currentTime + 0.04);
+    gain.gain.setValueAtTime(0.12, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.04);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start();
+    osc.stop(ctx.currentTime + 0.05);
+  } catch (e) {}
+}
+
+function playKeyClick() {
+  try {
+    const ctx = getAudioCtx();
+    if (!ctx) return;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(520, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.06);
+    gain.gain.setValueAtTime(0.15, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.06);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start();
+    osc.stop(ctx.currentTime + 0.07);
+  } catch (e) {}
+}
+
+function playMidnightChime() {
+  try {
+    const ctx = getAudioCtx();
+    if (!ctx) return;
+    const freqs = [523.25, 659.25, 783.99, 1046.50, 1318.51];
+    freqs.forEach((freq, idx) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, ctx.currentTime + idx * 0.12);
+      gain.gain.setValueAtTime(0.001, ctx.currentTime + idx * 0.12);
+      gain.gain.linearRampToValueAtTime(0.2, ctx.currentTime + idx * 0.12 + 0.04);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + idx * 0.12 + 1.2);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(ctx.currentTime + idx * 0.12);
+      osc.stop(ctx.currentTime + idx * 0.12 + 1.3);
+    });
+  } catch (e) {}
+}
+
+function playBlowSound() {
+  try {
+    const ctx = getAudioCtx();
+    if (!ctx) return;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(320, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(140, ctx.currentTime + 0.25);
+    gain.gain.setValueAtTime(0.18, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.25);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start();
+    osc.stop(ctx.currentTime + 0.26);
+  } catch (e) {}
+}
+
+/* ─── BIRTHDAY MUSIC SYNTHESIZER (MUSIC BOX TUNE) ─── */
+let isMusicPlaying = false;
+let musicTimeouts = [];
+
+function stopBirthdayMusic() {
+  isMusicPlaying = false;
+  musicTimeouts.forEach(t => clearTimeout(t));
+  musicTimeouts = [];
+  const btn = document.getElementById('music-toggle-btn');
+  const label = document.getElementById('music-label');
+  const icon = document.getElementById('music-icon');
+  if (btn) btn.classList.remove('playing');
+  if (label) label.textContent = "Birthday Music";
+  if (icon) icon.textContent = "🎵";
+}
+
+function playNote(freq, startTime, duration) {
+  const ctx = getAudioCtx();
+  if (!ctx || !isMusicPlaying) return;
+
+  const osc = ctx.createOscillator();
+  const osc2 = ctx.createOscillator();
+  const gain = ctx.createGain();
+
+  osc.type = 'sine';
+  osc.frequency.setValueAtTime(freq, startTime);
+  osc2.type = 'triangle';
+  osc2.frequency.setValueAtTime(freq * 2, startTime);
+
+  gain.gain.setValueAtTime(0.001, startTime);
+  gain.gain.linearRampToValueAtTime(0.18, startTime + 0.02);
+  gain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
+
+  const gain2 = ctx.createGain();
+  gain2.gain.value = 0.06;
+  osc2.connect(gain2);
+  gain2.connect(gain);
+
+  osc.connect(gain);
+  gain.connect(ctx.destination);
+
+  osc.start(startTime);
+  osc2.start(startTime);
+  osc.stop(startTime + duration + 0.05);
+  osc2.stop(startTime + duration + 0.05);
+}
+
+function playHappyBirthdayLoop() {
+  if (!isMusicPlaying) return;
+  const ctx = getAudioCtx();
+  if (!ctx) return;
+
+  const G4 = 392.00, A4 = 440.00, B4 = 493.88, C5 = 523.25;
+  const D5 = 587.33, E5 = 659.25, F5 = 698.46, G5 = 783.99;
+
+  const beat = 0.42;
+  const melody = [
+    // Phrase 1: Happy birthday to you
+    { f: G4, d: beat * 0.75 }, { f: G4, d: beat * 0.25 },
+    { f: A4, d: beat * 1.0 },  { f: G4, d: beat * 1.0 },
+    { f: C5, d: beat * 1.0 },  { f: B4, d: beat * 2.0 },
+    // Phrase 2: Happy birthday to you
+    { f: G4, d: beat * 0.75 }, { f: G4, d: beat * 0.25 },
+    { f: A4, d: beat * 1.0 },  { f: G4, d: beat * 1.0 },
+    { f: D5, d: beat * 1.0 },  { f: C5, d: beat * 2.0 },
+    // Phrase 3: Happy birthday dear Ibrahim
+    { f: G4, d: beat * 0.75 }, { f: G4, d: beat * 0.25 },
+    { f: G5, d: beat * 1.0 },  { f: E5, d: beat * 1.0 },
+    { f: C5, d: beat * 1.0 },  { f: B4, d: beat * 1.0 },
+    { f: A4, d: beat * 1.8 },
+    // Phrase 4: Happy birthday to you
+    { f: F5, d: beat * 0.75 }, { f: F5, d: beat * 0.25 },
+    { f: E5, d: beat * 1.0 },  { f: C5, d: beat * 1.0 },
+    { f: D5, d: beat * 1.0 },  { f: C5, d: beat * 2.2 }
+  ];
+
+  let now = ctx.currentTime + 0.05;
+  melody.forEach(note => {
+    playNote(note.f, now, note.d * 0.95);
+    now += note.d;
+  });
+
+  const totalDuration = (now - ctx.currentTime + 1.2) * 1000;
+  const loopTimeout = setTimeout(() => {
+    if (isMusicPlaying) {
+      playHappyBirthdayLoop();
+    }
+  }, totalDuration);
+  musicTimeouts.push(loopTimeout);
+}
+
+function startBirthdayMusic() {
+  getAudioCtx();
+  isMusicPlaying = true;
+  const btn = document.getElementById('music-toggle-btn');
+  const label = document.getElementById('music-label');
+  const icon = document.getElementById('music-icon');
+  if (btn) btn.classList.add('playing');
+  if (label) label.textContent = "Music: Pause";
+  if (icon) icon.textContent = "🎶";
+  playHappyBirthdayLoop();
+}
+
+function toggleMusic() {
+  if (isMusicPlaying) {
+    stopBirthdayMusic();
+  } else {
+    startBirthdayMusic();
+  }
+}
 
 /* ─── INTIMATE CANDLELIGHT MOTES & ROSE PETALS ─── */
 (function createBackground() {
@@ -59,7 +262,8 @@ function playMidnightChime() {}
 })();
 
 /* ─── SHINCHAN PASSCODE VERIFICATION (4 DIGITS) ─── */
-const TARGET_PASSCODE = "2005"; // 4-digit passcode
+// Birthday: 25/10/2026 (Supports DDMM: "2510" or Year: "2026")
+const VALID_PASSCODES = ["2510", "2026", "25102026"];
 
 const SHINCHAN_GIFS = {
   ask: "assets/shinchan-birthday.png",
@@ -83,6 +287,7 @@ function updateDateBoxes() {
 updateDateBoxes();
 
 function pressKey(num) {
+  playKeyClick();
   if (enteredDigits.length < 4) {
     enteredDigits += num;
     updateDateBoxes();
@@ -93,6 +298,7 @@ function pressKey(num) {
 }
 
 function deleteDigit() {
+  playKeyClick();
   if (enteredDigits.length > 0) {
     enteredDigits = enteredDigits.slice(0, -1);
     updateDateBoxes();
@@ -114,8 +320,8 @@ function submitBirthdayDate() {
     return;
   }
 
-  if (enteredDigits === TARGET_PASSCODE) {
-    // Correct Passcode (2005) - Directly transition to the Surprise Question Screen
+  if (VALID_PASSCODES.includes(enteredDigits)) {
+    // Correct Passcode - Directly transition to the Surprise Question Screen
     const danceGif = document.getElementById('dance-gif');
     if (danceGif) {
       danceGif.src = DANCE_GIF_URL;
@@ -168,7 +374,7 @@ function submitBirthdayDate() {
   } else {
     // Wrong Passcode
     img.src = SHINCHAN_GIFS.wrong;
-    txt.textContent = "Oops! Wrong Passcode! Try again, cutie! 🥺";
+    txt.textContent = "Oops! Try Ibrahim's birthday (2510)! 🥺";
     card.classList.remove('shake');
     void card.offsetWidth;
     card.classList.add('shake');
@@ -186,7 +392,7 @@ function resetQuiz() {
   const retryBtn = document.getElementById('retry-btn');
 
   img.src = SHINCHAN_GIFS.ask;
-  txt.textContent = "Enter the 4-digit secret passcode 💖";
+  txt.textContent = "Enter Ibrahim's 4-digit birthday code (2510) 💖";
   keypad.classList.remove('hidden-btn');
   retryBtn.classList.add('hidden-btn');
 }
@@ -356,6 +562,7 @@ function closeCakeModal() {
 
 function blowCandle(num, e) {
   if (e) e.stopPropagation();
+  playBlowSound();
   const flame = document.getElementById(`flame-${num}`);
   if (flame && !flame.classList.contains('extinguished')) {
     flame.classList.add('extinguished');
@@ -367,6 +574,7 @@ function blowCandle(num, e) {
 function makeCakeWish(e) {
   if (isWishMade) return;
   isWishMade = true;
+  playBlowSound();
 
   // Extinguish all 7 candles
   for (let i = 1; i <= 7; i++) {
@@ -380,7 +588,7 @@ function makeCakeWish(e) {
 
   // Update top arched text to celebration
   const archText = document.getElementById('cake-arch-text');
-  if (archText) archText.textContent = "HAPPY BIRTHDAY ! 🎉";
+  if (archText) archText.textContent = "HAPPY BIRTHDAY IBRAHIM! 🎉";
 
   // Hide hint and show celebration ribbon
   const hint = document.getElementById('cake-footer-hint');
@@ -420,8 +628,8 @@ const MYSTERY_GIFTS = {
   },
   3: {
     icon: "👑",
-    title: "Gift #3: Lifetime Happiness Pass",
-    desc: "Unlimited hugs, endless laughter, and all your deepest birthday wishes coming true! 🎁💫💖"
+    title: "Gift #3: Lifetime Happiness Pass for Ibrahim",
+    desc: "Unlimited smiles, endless laughter, grand success, and all your deepest birthday wishes coming true! 🎁💫💖"
   }
 };
 
@@ -467,19 +675,19 @@ function closeGiftModal() {
 const LETTER_SECTIONS = [
   {
     id: 'letter-headline-el',
-    text: "Happy birthday to my favourite\nperson! ❤️"
+    text: "Happy Birthday, M. Ibrahim Qureshi! 🎂❤️"
   },
   {
     id: 'letter-p1-el',
-    text: "I hope this year brings you everything you've been wishing for and so much more. Thank you for making my days happier, my bad days easier, and my life a little more beautiful just by being in it. 🥺💖"
+    text: "Wishing you the happiest and most blessed birthday on this special day, 25th October 2026! May this year bring you boundless happiness, grand success, good health, and all the incredible things you've been dreaming of. Thank you for being such an extraordinary person and lighting up the lives of everyone around you. ✨💖"
   },
   {
     id: 'letter-p2-el',
-    text: "I'm so lucky to have you, and I can't wait to make a million more memories with you. Here's to you, your dreams, and all the happiness you deserve."
+    text: "I am so grateful to celebrate this special day with you. May all your prayers be answered, your goals be achieved, and every single day be filled with laughter, peace, and unforgettable moments."
   },
   {
     id: 'letter-closing-el',
-    text: "Happy birthday, my love. I love you more than you know. 🫶🏻🎂❤️"
+    text: "Have the most wonderful birthday, Ibrahim! Stay blessed, keep shining, and keep smiling always! 🫶🏻🎉🎂🎈"
   }
 ];
 

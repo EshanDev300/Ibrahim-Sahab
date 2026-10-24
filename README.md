@@ -145,38 +145,21 @@ You can easily host this for free on GitHub Pages to share via link:
 
 You can personalize this surprise for your loved one in just a few minutes:
 
-### 1. Change the 4-Digit Passcode
-Open `script.js` and locate line 62:
-```javascript
-const TARGET_PASSCODE = "2005"; // Set your desired 4-digit code (e.g., birth year or special date)
-```
+### 1. 4-Digit Birthday Passcode
+The project is configured for **M. Ibrahim Qureshi** (Birth Date: **25/10/2026**):
+- **`2510`** (Date & Month: 25th of October)
+- **`2026`** (Birth Year)
+Both passcodes are automatically accepted by the lockscreen dial pad and keyboard.
 
-### 2. Replace Memory Photos
-Replace the image files inside the `assets/` directory with your own photos, keeping the same filenames:
+### 2. Replace Memory Photos (Optional)
+To add personal photos of Ibrahim, place your image files in the `assets/` directory:
 - `assets/memory1.jpg` through `assets/memory5.jpg`
 
-### 3. Edit the Birthday Letter Text
-Open `script.js` and edit the `LETTER_SECTIONS` array (around line 467):
-```javascript
-const LETTER_SECTIONS = [
-  {
-    id: 'letter-headline-el',
-    text: "Happy birthday to my favourite\nperson! ❤️"
-  },
-  {
-    id: 'letter-p1-el',
-    text: "Your custom sweet message here..."
-  },
-  {
-    id: 'letter-p2-el',
-    text: "Another paragraph sharing your feelings..."
-  },
-  {
-    id: 'letter-closing-el',
-    text: "Happy birthday, my love. I love you more than you know. 🫶🏻🎂❤️"
-  }
-];
-```
+### 3. Birthday Letter & Wishes
+The heartfelt letter in Box 3 has been personalized for M. Ibrahim Qureshi with animated live typewriter effect and celebration ribbons.
+
+### 4. Background Birthday Music
+An interactive Web Audio music synthesizer plays a music-box rendition of the "Happy Birthday" tune when toggled with the floating 🎵 button in the top right.
 
 ---
 

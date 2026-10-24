@@ -8,11 +8,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="author" content="@saklin_01" />
-  <title>Happy Birthday 🎂</title>
+  <title>Happy Birthday M. Ibrahim Qureshi! 🎂🎉</title>
   <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Chewy&family=Comic+Neue:wght@700&family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=DynaPuff:wght@600;700&family=Fredoka:wght@600;700;800;900&family=Great+Vibes&family=Playfair+Display:wght@400;600;700;900&family=Poppins:wght@400;500;600;700&family=Sniglet:wght@800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+
+  <!-- Floating Birthday Music Control -->
+  <button id="music-toggle-btn" class="music-toggle-btn" onclick="toggleMusic()" aria-label="Toggle Birthday Music">
+    <span class="music-icon" id="music-icon">🎵</span>
+    <span id="music-label">Birthday Music</span>
+  </button>
 
   <!-- Ambient Warm Candlelight & Rose Petal Layer -->
   <div id="bg-ambient"></div>
@@ -51,8 +57,8 @@
 
         <div class="passcode-container">
           <div class="passcode-header">
-            <h3 id="quiz-title">Enter a passcode</h3>
-            <p id="quiz-text">Enter the 4-digit secret passcode 💖</p>
+            <h3 id="quiz-title">M. Ibrahim Qureshi 🎂</h3>
+            <p id="quiz-text">Enter the 4-digit birthday code (2510) 💖</p>
           </div>
 
           <!-- 4 Passcode Boxes (Matching Reference Exactly) -->
@@ -230,7 +236,7 @@
       <!-- Bottom Prompt Text -->
       <div class="mystery-prompt-wrap">
         <h2 class="mystery-title">Tap on the mystery box</h2>
-        <p class="mystery-subtitle">to unlock your gifts!</p>
+        <p class="mystery-subtitle">to unlock your gifts, Ibrahim!</p>
       </div>
 
     </div>
@@ -304,7 +310,7 @@
           <!-- Horizontal Clothesline Photos Track -->
           <div class="clothesline-photos-track" id="clothesline-photos-track">
             
-            <!-- Photo 1: Anya Birthday Cake -->
+            <!-- Photo 1: Ibrahim on Sofa -->
             <div class="hanging-polaroid-item tilt-left" onclick="focusHangingPhoto(this)">
               <div class="wooden-clothespin">
                 <span class="peg-slit"></span>
@@ -312,16 +318,16 @@
               </div>
               <div class="gingham-frame">
                 <div class="photo-inner-box">
-                  <img src="assets/memory1.jpg" alt="Anya with Birthday Cake" />
+                  <img src="assets/ibrahim1.png" alt="M. Ibrahim Qureshi" />
                 </div>
-                <div class="photo-caption-tag">Waku Waku Cake! 🎂</div>
+                <div class="photo-caption-tag">Happy Birthday Ibrahim! 🎂</div>
               </div>
             </div>
 
             <!-- Red Bow Deco -->
             <div class="line-deco-element bow-deco">🎀</div>
 
-            <!-- Photo 2: Anya Smug Heh Face -->
+            <!-- Photo 2: Ibrahim with Talha Younus -->
             <div class="hanging-polaroid-item tilt-right" onclick="focusHangingPhoto(this)">
               <div class="wooden-clothespin">
                 <span class="peg-slit"></span>
@@ -329,16 +335,16 @@
               </div>
               <div class="gingham-frame">
                 <div class="photo-inner-box">
-                  <img src="assets/memory2.jpg" alt="Anya Smug Heh Face" />
+                  <img src="assets/ibrahim2.png" alt="Ibrahim with Talha Younus" />
                 </div>
-                <div class="photo-caption-tag">Heh! Peanuts & Gift 🎁</div>
+                <div class="photo-caption-tag">Meetup with Talha Younus 🤝</div>
               </div>
             </div>
 
             <!-- Red Hibiscus Flower Deco -->
             <div class="line-deco-element flower-deco">🌺</div>
 
-            <!-- Photo 3: Anya with Chimera & Balloons -->
+            <!-- Photo 3: Ibrahim in Blue Kurta -->
             <div class="hanging-polaroid-item tilt-straight" onclick="focusHangingPhoto(this)">
               <div class="wooden-clothespin">
                 <span class="peg-slit"></span>
@@ -346,16 +352,16 @@
               </div>
               <div class="gingham-frame">
                 <div class="photo-inner-box">
-                  <img src="assets/memory3.jpg" alt="Anya with Chimera Plushie" />
+                  <img src="assets/ibrahim3.png" alt="M. Ibrahim Qureshi" />
                 </div>
-                <div class="photo-caption-tag">Best Friend Chimera! 🎈</div>
+                <div class="photo-caption-tag">Aesthetic Vibes & Smile! ✨</div>
               </div>
             </div>
 
             <!-- Red Bow Deco -->
             <div class="line-deco-element bow-deco">🎀</div>
 
-            <!-- Photo 4: Anya Blowing Birthday Candles -->
+            <!-- Photo 4: Ibrahim Rooftop Sunset -->
             <div class="hanging-polaroid-item tilt-left" onclick="focusHangingPhoto(this)">
               <div class="wooden-clothespin">
                 <span class="peg-slit"></span>
@@ -363,16 +369,16 @@
               </div>
               <div class="gingham-frame">
                 <div class="photo-inner-box">
-                  <img src="assets/memory4.jpg" alt="Anya Blowing Out Candles" />
+                  <img src="assets/ibrahim4.png" alt="M. Ibrahim Qureshi" />
                 </div>
-                <div class="photo-caption-tag">Make A Wish 🕯️✨</div>
+                <div class="photo-caption-tag">Dream Big & Reach High! ☁️</div>
               </div>
             </div>
 
             <!-- Red Hibiscus Flower Deco -->
             <div class="line-deco-element flower-deco">🌺</div>
 
-            <!-- Photo 5: Anya Secret Spy with Bond -->
+            <!-- Photo 5: Ibrahim Bewajah Collage -->
             <div class="hanging-polaroid-item tilt-right" onclick="focusHangingPhoto(this)">
               <div class="wooden-clothespin">
                 <span class="peg-slit"></span>
@@ -380,9 +386,9 @@
               </div>
               <div class="gingham-frame">
                 <div class="photo-inner-box">
-                  <img src="assets/memory5.jpg" alt="Anya and Bond Dog" />
+                  <img src="assets/ibrahim5.png" alt="M. Ibrahim Qureshi Collage" />
                 </div>
-                <div class="photo-caption-tag">Secret Agent Anya & Bond 🐶</div>
+                <div class="photo-caption-tag">Living in the Future! 🎵🌟</div>
               </div>
             </div>
 
@@ -492,17 +498,26 @@
                 </textPath>
               </text>
 
-              <!-- Left Side: "i love you" & Confetti Streamers (Exact Reference) -->
-              <g class="left-doodle-group" transform="translate(105, 305) rotate(-18)">
-                <text x="0" y="0" fill="#9c1424" font-family="'Chewy', 'Fredoka', cursive, sans-serif" font-size="36" font-weight="bold">i love</text>
-                <text x="18" y="42" fill="#9c1424" font-family="'Chewy', 'Fredoka', cursive, sans-serif" font-size="38" font-weight="bold">y o u</text>
+              <!-- Left Side: Ibrahim Birthday Polaroid Frame & Doodles -->
+              <g class="cake-ibrahim-polaroid" transform="translate(32, 215) rotate(-6)">
+                <!-- Polaroid Backing Card with drop shadow -->
+                <rect x="0" y="0" width="138" height="175" rx="6" fill="#ffffff" stroke="#e0c3b2" stroke-width="2" />
+                <!-- Cute Washi Tape on Top -->
+                <rect x="36" y="-7" width="66" height="15" rx="2" fill="#f48fb1" opacity="0.88" transform="rotate(2 69 0)" />
+                <!-- Clipped Photo of Ibrahim -->
+                <clipPath id="cake-ibrahim-clip">
+                  <rect x="9" y="9" width="120" height="128" rx="4" />
+                </clipPath>
+                <image href="assets/ibrahim3.png" x="9" y="9" width="120" height="128" preserveAspectRatio="xMidYMid slice" clip-path="url(#cake-ibrahim-clip)" />
+                <!-- Caption below photo -->
+                <text x="69" y="158" text-anchor="middle" font-family="'Chewy', 'Fredoka', cursive, sans-serif" font-size="16" fill="#9c1424" font-weight="bold">Ibrahim 🎂✨</text>
               </g>
+
               <g class="confetti-streamers">
-                <path d="M 35,270 Q 55,290 30,315 T 45,360" fill="none" stroke="#ef5350" stroke-width="3" stroke-linecap="round"/>
-                <path d="M 65,420 Q 90,405 80,445 T 105,475" fill="none" stroke="#ff4081" stroke-width="3" stroke-linecap="round"/>
-                <path d="M 40,490 Q 60,470 50,510 T 80,530" fill="none" stroke="#ab47bc" stroke-width="3" stroke-linecap="round"/>
-                <text x="40" y="465" fill="#fbc02d" font-size="28">✦</text>
-                <text x="145" y="525" fill="#ffa726" font-size="22">★</text>
+                <path d="M 35,420 Q 55,440 30,465 T 45,510" fill="none" stroke="#ef5350" stroke-width="3" stroke-linecap="round"/>
+                <path d="M 165,420 Q 190,405 180,445 T 195,475" fill="none" stroke="#ff4081" stroke-width="3" stroke-linecap="round"/>
+                <text x="160" y="515" fill="#fbc02d" font-size="28">✦</text>
+                <text x="35" y="530" fill="#ffa726" font-size="22">★</text>
               </g>
 
               <!-- Top Right: Dangling "CLICK ME" Heart Tag (Exact Reference) -->
@@ -689,7 +704,7 @@
         <!-- Wish Celebration Ribbon (Integrated at bottom, never blocks the cake) -->
         <div id="cake-wish-banner" class="cake-wish-banner hidden">
           <div class="wish-ribbon-card">
-            <p class="wish-main-text">🎉 "May your year be as sweet, bright, and delightful as this birthday cake! All your dreams will come true!" 💖🍰✨</p>
+            <p class="wish-main-text">🎉 "Happy Birthday M. Ibrahim Qureshi! May 25/10/2026 mark the start of your most glorious year filled with immense happiness, success, and endless blessings! All your wishes will come true!" 💖🍰✨</p>
             <div class="wish-buttons-row">
               <button class="cake-btn-again" onclick="resetCake()">🕯️ Relight Candles</button>
               <button class="cake-btn-back" onclick="closeCakeModal()">💖 Back to Gifts</button>
@@ -733,7 +748,7 @@
             <!-- Gingham / Mosaic Checkered Border Wrapper -->
             <div class="letter-gingham-wrap">
               <div class="letter-photo-inner">
-                <img src="assets/memory1.jpg" alt="Anya Birthday Celebration" class="letter-photo-img" />
+                <img src="assets/ibrahim3.png" alt="M. Ibrahim Qureshi" class="letter-photo-img" />
               </div>
             </div>
 
@@ -780,21 +795,21 @@
           </div>
         </div>
 
-        <!-- Right Side: Heartfelt Birthday / Love Letter Text -->
+        <!-- Right Side: Heartfelt Birthday Letter Text -->
         <div class="letter-text-column" onclick="skipLetterTypewriter()" title="Click to reveal instantly">
           <div class="letter-content-body">
-            <h2 class="letter-headline" id="letter-headline-el">Happy birthday to my favourite<br>person! ❤️</h2>
+            <h2 class="letter-headline" id="letter-headline-el">Happy Birthday, M. Ibrahim Qureshi! 🎂❤️</h2>
             
             <p class="letter-para letter-p1" id="letter-p1-el">
-              I hope this year brings you everything you've been wishing for and so much more. Thank you for making my days happier, my bad days easier, and my life a little more beautiful just by being in it. 🥺💖
+              Wishing you the happiest and most blessed birthday on this special day, 25th October 2026! May this year bring you boundless happiness, grand success, good health, and all the incredible things you have been dreaming of. Thank you for being such an extraordinary person and lighting up the lives of everyone around you. ✨💖
             </p>
             
             <p class="letter-para letter-p2" id="letter-p2-el">
-              I'm so lucky to have you, and I can't wait to make a million more memories with you. Here's to you, your dreams, and all the happiness you deserve.
+              I am so grateful to celebrate this special day with you. May all your prayers be answered, your goals be achieved, and every single day be filled with laughter, peace, and unforgettable moments.
             </p>
             
             <p class="letter-para letter-closing" id="letter-closing-el">
-              Happy birthday, my love. I love you more than you know. 🫶🏻🎂❤️
+              Have the most wonderful birthday, Ibrahim! Stay blessed, keep shining, and keep smiling always! 🫶🏻🎉🎂🎈
             </p>
           </div>
         </div>
@@ -836,9 +851,9 @@
         <div class="clock-glass"></div>
       </div>
       <div class="clock-plate">
-        <div class="plate-tag">✦ MIDNIGHT COUNTDOWN ✦</div>
+        <div class="plate-tag">✦ MIDNIGHT SURPRISE FOR IBRAHIM ✦</div>
         <div class="digital-time"><span id="hh">11</span><span class="colon">:</span><span id="mm">59</span><span class="colon">:</span><span id="ss">55</span></div>
-        <div class="plate-hint">Watch the clock strike 12:00:00</div>
+        <div class="plate-hint">Countdown to 25th October 2026 🎂</div>
       </div>
     </div>
   </div>
